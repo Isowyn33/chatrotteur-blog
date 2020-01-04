@@ -3,10 +3,10 @@ let gtm = ''
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Bootstrap Strapi Starter`,
-    description: `Gatsby + Strapi = <3`,
-    author: `Jeremy Lynch`,
-    siteUrl: `https://gatsby-strapi-starter.netlify.com/`,
+    title: `Chatrotteur's Blog`,
+    description: `Voyage + Gastronomie = <3`,
+    author: `Yoann MURAT`,
+    siteUrl: `https://chaventures.netlify.com/`,
     phone: '12345',
     fax: '12345',
     address: '123 fake street',
@@ -44,19 +44,17 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-source-strapi`,
-    //   options: {
-    //     apiURL: `http://localhost:1337`,
-    //     queryLimit: 1000, // Default to 100
-    //     contentTypes: ['article'],
-    //     // Possibility to login with a strapi user, when content types are not publically available (optional).
-    //     loginData: {
-    //       identifier: "",
-    //       password: "",
-    //     },
-    //   },
-    // },
+    {
+      resolve: `gatsby-source-strapi`,
+      options: {
+        apiURL: `https://api-chaventures.herokuapp.com`,
+        queryLimit: 1000, // Default to 100
+        contentTypes: [ // List of the Content Types you want to be able to request from Gatsby.
+          `article`,
+          `user`
+        ],
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

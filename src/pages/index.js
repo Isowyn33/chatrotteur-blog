@@ -29,7 +29,7 @@ let Service = ({title, Icon = FaHome}) => (
   </Col>
 )
 
-export default () => (
+export default ({ data }) => (
   <Layout>
     <SEO title="Home" />
     <Slider/>
@@ -41,6 +41,16 @@ export default () => (
     </Container>
     <Container className="py-5">
       <h2 className="text-center mb-4">Services</h2>
+      <ul>
+      {data.allStrapiArticle.edges.map(document => (
+        <li key={document.node.id}>
+          <h2>
+            <Link to={`/${document.node.id}`}>{document.node.title}</Link>
+          </h2>
+          <p>{document.node.content}</p>
+        </li>
+      ))}
+    </ul>
       <Row>
         <Service title="Websites"/>
         <Service title="SEO"/>
@@ -71,3 +81,17 @@ export default () => (
     </StyledBackground>
   </Layout>
 )
+
+export const pageQuery = graphql`
+  query IndexQuery {
+    allStrapiArticle {
+      edges {
+        node {
+          id
+          title
+          content
+        }
+      }
+    }
+  }
+`
