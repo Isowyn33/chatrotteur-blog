@@ -6,24 +6,19 @@ import Button from '../components/btn'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { FaGithub } from 'react-icons/fa'
-import Form from '../components/form'
 import Slider from '../components/slider'
 import Box from '../components/box'
-import Hr from '../components/hr'
 import { FaHome } from 'react-icons/fa';
-import Benefits from '../components/benefits'
 import styled from 'styled-components'
 
-let StyledBackground = styled.div`
-  background: linear-gradient(to bottom,#f9fbfd 0,#fff 100%);
-`
 
-let Service = ({title, Icon = FaHome}) => (
+let Service = ({data, Icon = FaHome}) => (
   <Col>
-    <Link to="/">
+    <Link to={`/${data.node.id}`}>
       <Box>
         <Icon size={30}/>
-        <h4 className="mt-3">{title}</h4>
+        <h4 className="mt-3">{data.node.title}</h4>
+        <p>{data.node.content}</p>
       </Box>
     </Link>
   </Col>
@@ -35,50 +30,26 @@ export default ({ data }) => (
     <Slider/>
     <Container className="pt-4">
       <div className="text-center">
-        <h4>A slightly opinionated Gatsby starter template.</h4>
-        <p className="text-muted">Built with love on the Gold Coast, QLD Australia</p>
+        <h4>Blog sur les voyages et la gastronomie</h4>
       </div>
     </Container>
     <Container className="py-5">
-      <h2 className="text-center mb-4">Services</h2>
+      <h2 className="text-center mb-4">Articles</h2>
       <ul>
-      {data.allStrapiArticle.edges.map(document => (
-        <li key={document.node.id}>
-          <h2>
-            <Link to={`/${document.node.id}`}>{document.node.title}</Link>
-          </h2>
-          <p>{document.node.content}</p>
-        </li>
-      ))}
+      
     </ul>
       <Row>
-        <Service title="Websites"/>
-        <Service title="SEO"/>
-        <Service title="API"/>
+      {data.allStrapiArticle.edges.map(document => (
+          <Service data={document}/>
+      ))}
       </Row>
     </Container>
     <div className="text-center py-5">
-      <Button to="https://github.com/jeremylynch/gatsby-strapi-starter" className="btn btn-primary btn-lg">
+      <Button to="https://github.com/isowyn33/chatrotteur-blog" className="btn btn-primary btn-lg">
         <FaGithub className="mr-1"/>
         View on Github
       </Button>
     </div>
-    <StyledBackground>
-      <Benefits/>
-      <div className="py-5">
-        <Container>
-          <Row className="d-flex justify-content-center">
-            <Col md={8}>
-              <Box style={{textAlign: 'left'}}>
-                <h3 className="text-center">Reactstrap Form Fields</h3>
-                <Hr/>
-                <Form/>
-              </Box>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    </StyledBackground>
   </Layout>
 )
 
